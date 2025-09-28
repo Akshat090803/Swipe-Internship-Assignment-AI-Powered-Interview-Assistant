@@ -146,8 +146,8 @@ export default function Interviewee() {
                 <div>
                   <label
                     htmlFor="resume"
-                    className="cursor-pointer gradient-primary text-white flex items-center gap-2 px-2 py-1 rounded-lg font-semibold"
-                    aria-label="Upload your resume, only PDF supported"
+                    className="cursor-pointer gradient-primary text-white flex items-center gap-2 px-2 py-1 rounded-lg font-semibold justify-center"
+                      aria-label="Upload your resume, only PDF or Word documents supported"
                   >
                     <GrDocumentText />
                     {loading ? "Loading..." : "Upload Resume"}
@@ -158,9 +158,9 @@ export default function Interviewee() {
                     id="resume"
                     className="hidden"
                     onChange={fileChangeHandler} // handle file
-                    accept=".pdf"
+                    accept=".pdf,.doc,.docx"
                   />
-                  <p className="text-xs text-subhead mt-1 text-center">Accepted formats: PDF</p>
+                  <p className="text-xs text-subhead mt-1 text-center">Accepted formats: PDF, DOC, DOCX</p>
 
                 </div>
               </div>
