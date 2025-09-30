@@ -61,7 +61,10 @@ export default function CandidateCard({ candidateData, onOpenDialog, total = 60 
     if (score >= 80) {
       return 'bg-green-100 border-green-500 text-green-700';
     }
-    if (score >= 50) {
+     if (score >= 60) {
+      return 'bg-purple-100 border-purple-500 text-purple-700';
+    }
+    if (score >= 45) {
       return 'bg-yellow-100 border-yellow-500 text-yellow-700';
     }
     return 'bg-red-100 border-red-500 text-red-700';
@@ -72,13 +75,13 @@ export default function CandidateCard({ candidateData, onOpenDialog, total = 60 
       <Card>
         <CardHeader className={"border-b flex flex-row justify-between items-center"}>
           <div>
-            <CardTitle className={"text-xl font-bold "}>{candidateData.contactDetails?.name}</CardTitle>
+            <CardTitle className={"text-xl font-bold mb-1 "}>{candidateData.contactDetails?.name}</CardTitle>
             <CardDescription>
               <p className={`rounded-lg py-1 px-3 border-2  w-fit text-xs font-bold ${getScoreColor(candidateData.score)}`}>{`Score: ${candidateData.score}/60`}</p>
             </CardDescription>
           </div>
           <DialogTrigger asChild>
-            <div onClick={onOpenDialog} className="h-8 w-8 bg-white hover:opacity-85 rounded-lg p-1 flex items-center justify-center cursor-pointer">
+            <div onClick={onOpenDialog} className="h-8 w-8 bg-white hover:opacity-85 rounded-lg p-1 flex items-center justify-center cursor-pointer eye">
               <FaRegEye className="h-4 w-4 text-black" />
             </div>
           </DialogTrigger>

@@ -83,7 +83,7 @@ export default function Interviewer() {
           </div>
 
           <div className="pt-4 sm:gap-6 gap-3 flex-col w-full  sm:w-[60%] sm:flex-row flex">
-            <Input placeholder={"search candidates by name..."} value={searchTerm} onChange={searchHandler} />
+            <Input className={"focus:outline-none    focus-visible:ring-1 focus-visible:ring-cyan-700 focus:border-none "} placeholder={"search candidates by name..."} value={searchTerm} onChange={searchHandler} />
 
             <Select value={sort} onValueChange={setSort}>
               <SelectTrigger  className="sm:w-48 w-full">
@@ -91,9 +91,9 @@ export default function Interviewer() {
                 <SelectValue  />
               </SelectTrigger>
              <SelectContent className="glass">
-              <SelectItem value="score">Sort by Score</SelectItem>
-              <SelectItem value="date">Sort by Date</SelectItem>
-              <SelectItem value="name">Sort by Name</SelectItem>
+              <SelectItem className={"focus:bg-cyan-600 "} value="score">Sort by Score</SelectItem>
+              <SelectItem className={"focus:bg-cyan-600"} value="date">Sort by Date</SelectItem>
+              <SelectItem className={"focus:bg-cyan-600 "} value="name">Sort by Name</SelectItem>
             </SelectContent>
             </Select>
           </div>

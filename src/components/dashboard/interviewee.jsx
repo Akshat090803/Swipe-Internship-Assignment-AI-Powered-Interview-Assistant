@@ -134,6 +134,7 @@ export default function Interviewee() {
 
  function performanceClose(){
         dispatch(resetCurrentInterview());
+        setStatus((prev)=>({...prev,SHOWUPLOADRESUME:true}))
  }
 
   return (
@@ -168,8 +169,9 @@ export default function Interviewee() {
 
                 <div>
                   <label
+                  
                     htmlFor="resume"
-                    className="cursor-pointer gradient-primary text-white flex items-center gap-2 px-2 py-1 rounded-lg font-semibold justify-center"
+                    className={` gradient-primary text-white flex items-center gap-2 px-2 py-1 rounded-lg font-semibold justify-center ${loading ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
                       aria-label="Upload your resume, only PDF or Word documents supported"
                   >
                    
@@ -187,6 +189,7 @@ export default function Interviewee() {
                   </label>
 
                   <input
+                    disabled={loading}
                     type="file"
                     id="resume"
                     className="hidden"

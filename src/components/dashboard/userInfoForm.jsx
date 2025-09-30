@@ -228,7 +228,7 @@ Here is an example of the required output structure:
           <div className="space-y-1 sm:w-[70%] w-full ">
             <Label className={"text-subhead"}>Name</Label>
             <Input
-              required={true}
+              
               onChange={onChangeHandler}
               name="name"
               value={formField.name}
@@ -240,7 +240,7 @@ Here is an example of the required output structure:
           <div className="space-y-1 sm:w-[70%] w-full ">
             <Label className={"text-subhead"}>Email</Label>
             <Input
-              required={true}
+             
               onChange={onChangeHandler}
               name="email"
               value={formField.email}
@@ -251,7 +251,7 @@ Here is an example of the required output structure:
           <div className="space-y-1 sm:w-[70%] w-full ">
             <Label className={"text-subhead"}>Phone</Label>
             <Input
-              required={true}
+             
               onChange={onChangeHandler}
               name="phone"
               value={formField.phone}

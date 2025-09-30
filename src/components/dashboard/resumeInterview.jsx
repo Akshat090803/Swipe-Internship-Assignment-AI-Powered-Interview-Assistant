@@ -1,9 +1,7 @@
 import {
   Card,
-  CardAction, // Note: This isn't used in the final component, but kept it as it was in the original imports.
   CardContent,
   CardDescription,
-  CardFooter, // Note: This isn't used in the final component, but kept it as it was in the original imports.
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -27,8 +25,8 @@ export default function ResumeInterview({resumeInterviewhandler}){
         </CardHeader>
         <CardContent className="flex gap-3 flex-col sm:flex-row"> 
        
-          <Button onClick={()=>{dispatch(resetCurrentInterview())}} variant="outline" className="flex-1">Start New Interview</Button>
-          <Button onClick={resumeInterviewhandler}  className="flex-1">Resume Interview</Button>
+          <Button onClick={()=>{dispatch(resetCurrentInterview())}} variant="outline" className="flex-1 cursor-pointer">Start New Interview</Button>
+          <Button onClick={resumeInterviewhandler}  className="flex-1 gradient-primary text-white hover:opacity-85 cursor-pointer">Resume Interview</Button>
           
         </CardContent>
       

@@ -181,6 +181,8 @@ background: linear-gradient(
 
   
 
-
+.eye:hover{
+  opacity: 0.85;
+}
 
   
