@@ -11,7 +11,7 @@ import { Button } from "../ui/button"
 import { useDispatch } from "react-redux"
 import { resetCurrentInterview } from "@/store/interviewSlice";
 
-export default function ResumeInterview(){
+export default function ResumeInterview({resumeInterviewhandler}){
  
   const dispatch =useDispatch();
 
@@ -28,7 +28,7 @@ export default function ResumeInterview(){
         <CardContent className="flex gap-3 flex-col sm:flex-row"> 
        
           <Button onClick={()=>{dispatch(resetCurrentInterview())}} variant="outline" className="flex-1">Start New Interview</Button>
-          <Button  className="flex-1">Resume Interview</Button>
+          <Button onClick={resumeInterviewhandler}  className="flex-1">Resume Interview</Button>
           
         </CardContent>
       
