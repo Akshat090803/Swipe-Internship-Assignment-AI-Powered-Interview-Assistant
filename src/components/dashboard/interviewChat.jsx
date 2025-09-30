@@ -111,7 +111,7 @@ export default function InterviewChat() {
   async function handleFinalEvaluation() {
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
     const genAi = new GoogleGenerativeAI(apiKey);
-    const model = genAi.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const model = genAi.getGenerativeModel({ model: "gemini-2.5-flash-lite-preview-06-17"  });
 
     const prompt = `
     You are an expert technical interviewer evaluating a candidate's performance for a Full Stack Developer role (React/Node.js).

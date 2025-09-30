@@ -75,7 +75,7 @@ export default function UserInfoForm({
 
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
     const genAi = new GoogleGenerativeAI(apiKey);
-    const model = genAi.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const model = genAi.getGenerativeModel({ model: "gemini-2.5-flash-lite-preview-06-17"  });
 
     const prompt = `You are an expert technical interviewer hiring for a Full Stack Developer role with a focus on React and Node.js.
 
@@ -260,8 +260,10 @@ Here is an example of the required output structure:
           </div>
 
           <Button
+          disabled={loading}
             className={
               "gradient-primary text-white mt-4 cursor-pointer font-bold"
+              
             }
             type="submit"
           >
