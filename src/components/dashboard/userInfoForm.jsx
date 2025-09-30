@@ -41,8 +41,37 @@ export default function UserInfoForm({
     setStatus(STATUS);
   }
 
+  const validateForm = () => {
+    const { name, email, phone } = formField;
+
+    if (!name || name.trim() === "") {
+      toast.error("Please enter your name.");
+      return false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      toast.error("Please enter a valid email address.");
+      return false;
+    }
+
+    const phoneRegex = /^(?:\+91)?[6-9]\d{9}$/;
+    if (!phone || !phoneRegex.test(phone.replace(/\s/g, ""))) {
+      toast.error("Please enter a valid 10-digit Indian phone number.");
+      return false;
+    }
+
+    return true;
+  };
+
+  
+
   async function prepareQuestion(e) {
     e.preventDefault();
+
+     if (!validateForm()) {
+      return;
+    }
 
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
     const genAi = new GoogleGenerativeAI(apiKey);
