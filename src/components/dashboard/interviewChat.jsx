@@ -30,13 +30,16 @@ export default function InterviewChat() {
 
   const [evaluatingStatus, setEvaluatingStatus] = useState(STATUS.LOADING);
 
+  const { currentInterview, currentStatus } = useSelector((state) => state.interview);
+
+  
   const {
-    interviewChat,
-    questions,
-    currentQuestionIndex,
-    remainingTime,
-    answers,
-  } = useSelector((state) => state.interview.currentInterview);
+    interviewChat = [],
+    questions = [],
+    currentQuestionIndex = 0,
+    remainingTime = 0,
+    answers = [],
+  } = currentInterview || {};
 
   const dispatch = useDispatch();
 
@@ -99,7 +102,7 @@ export default function InterviewChat() {
 
     setAnswer("");
 
-    if (currentQuestionIndex >= questions.length - 1) {
+    if (currentQuestionIndex >= questions.length - 1 ) {
       handleFinalEvaluation();
     }
   }

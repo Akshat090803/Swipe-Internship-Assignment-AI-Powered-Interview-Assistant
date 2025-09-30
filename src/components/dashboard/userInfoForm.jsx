@@ -226,6 +226,7 @@ Here is an example of the required output structure:
               onChange={onChangeHandler}
               name="phone"
               value={formField.phone}
+              type={"phone"}
             />
           </div>
 

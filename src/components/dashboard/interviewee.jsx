@@ -198,9 +198,9 @@ export default function Interviewee() {
               </div>
             )}
             {status.SHOWINFONEED && <UserInfoForm userInfo={userInfo} setUserInfo={setUserInfo} fileName={fileName} setFileName={setFileName} setStatus={setStatus}/>}
-            {status.SHOWCHAT && <InterviewChat/>}
-            {currentStatus === "pending" && <p>Resume The Interview</p>}
-            {(currentStatus === "completed" && pastInterviews.length ) && <DetailedEvaluation interviewData={pastInterviews[pastInterviews.length - 1]} clickHandler={performanceClose}/>}
+            {(status.SHOWCHAT && currentStatus === "pending") && <InterviewChat/>}
+            {(currentStatus === "pending" && !status.SHOWCHAT) && <p>Resume The Interview</p>}
+            {(currentStatus === "completed" && pastInterviews.length ) && <DetailedEvaluation interviewData={pastInterviews[pastInterviews.length - 1]} clickHandler={performanceClose} showExit={true}/>}
           </div>
         </CardContent>
       </Card>

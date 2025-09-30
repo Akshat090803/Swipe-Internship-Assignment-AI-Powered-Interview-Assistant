@@ -27,12 +27,15 @@ import {
 } from "../ui/select";
 import { useEffect, useState } from "react";
 import CandidateCard from "./candidateCard";
+import { Dialog, DialogContent } from "../ui/dialog";
+import DetailedEvaluation from "./detailedEvalaution";
 
 export default function Interviewer() {
   const { pastInterviews } = useSelector((state) => state.interview);
    const [sort,setSort] = useState('date')
   const [filteredInterviews,setFilteredInterviews]=useState(pastInterviews);
   const [searchTerm , setSearchTerm] = useState("")
+  const [selectedCandidate, setSelectedCandidate] = useState(null);
 
   function searchHandler(e){
     const value = e.target.value;
@@ -41,9 +44,25 @@ export default function Interviewer() {
 
   
 
-  useEffect(()=>{
-         
-  },[sort])
+ useEffect(() => {
+    let interviews = [...pastInterviews];
+
+    if (searchTerm) {
+      interviews = interviews.filter(interview =>
+        interview.contactDetails.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    if (sort === 'score') {
+      interviews.sort((a, b) => b.score - a.score);
+    } else if (sort === 'name') {
+      interviews.sort((a, b) => a.contactDetails.name.localeCompare(b.contactDetails.name));
+    } else if (sort === 'date') {
+      interviews.reverse();
+    }
+    
+
+    setFilteredInterviews(interviews);
+  }, [searchTerm, sort, pastInterviews]);
 
   return (
     <div className="mb-10 ">
@@ -93,10 +112,19 @@ export default function Interviewer() {
               }
             </p>
 
-            </div> : <div>
+            </div> : <div className="flex flex-col gap-3">
                 {
                   filteredInterviews.map((item,ind)=>{
-                    return <CandidateCard candidateData={item} key={ind}/>
+                    return  <Dialog key={ind} onOpenChange={(isOpen) => !isOpen && setSelectedCandidate(null)}>
+                    <CandidateCard candidateData={item} onOpenDialog={() => setSelectedCandidate(item)} />
+                    {selectedCandidate && (
+                       <DialogContent className=" min-w-[90%] max-w-[90vw] ">
+                         <div className="h-[80vh]  ">
+                          <DetailedEvaluation extraCSS={"h-[70vh] overflow-x-hidden overflow-y-auto"} interviewData={selectedCandidate} />
+                         </div>
+                       </DialogContent>
+                    )}
+                  </Dialog>
                   })
                 }
               </div>}

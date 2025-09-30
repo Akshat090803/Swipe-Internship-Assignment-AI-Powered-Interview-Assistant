@@ -16,7 +16,7 @@ const getColorAccToScore = (score) => {
   return "[&>div]:bg-green-500";
 };
 
-export default function DetailedEvaluation({ interviewData, total = 60 , clickHandler }) {
+export default function DetailedEvaluation({ interviewData, total = 60 , clickHandler , showExit =false ,extraCSS ="" }) {
   const { score, aiSummary, questionWiseScore, contactDetails, questions } =
     interviewData;
 
@@ -29,11 +29,11 @@ export default function DetailedEvaluation({ interviewData, total = 60 , clickHa
         Performance Breakdown 🏆
        
       </h2>
-        <BiLogOut className="absolute cursor-pointer h-8 w-8 top-0 text-purple-600" onClick={clickHandler}/>
+        {showExit && <BiLogOut className="absolute cursor-pointer h-8 w-8 top-0 text-purple-600" onClick={clickHandler}/>}
       </div>
      
 
-      <div className="flex  gap-6 flex-col">
+      <div className={`flex  gap-6 flex-col ${extraCSS}`}>
         {/* contact info */}
         <div className="flex gap-6 flex-col sm:flex-row items-center">
           <div className="w-24 h-24 text-center rounded-full bg-input/80 text-white flex items-center justify-center">
