@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import InterviewChat from "./interviewChat";
 import DetailedEvaluation from "./detailedEvalaution";
 import { resetCurrentInterview } from "@/store/interviewSlice";
+import ResumeInterview from "./resumeInterview";
 
 
 export const STATUS = {
@@ -199,7 +200,7 @@ export default function Interviewee() {
             )}
             {status.SHOWINFONEED && <UserInfoForm userInfo={userInfo} setUserInfo={setUserInfo} fileName={fileName} setFileName={setFileName} setStatus={setStatus}/>}
             {(status.SHOWCHAT && currentStatus === "pending") && <InterviewChat/>}
-            {(currentStatus === "pending" && !status.SHOWCHAT) && <p>Resume The Interview</p>}
+            {(currentStatus === "pending" && !status.SHOWCHAT) && <ResumeInterview/>}
             {(currentStatus === "completed" && pastInterviews.length ) && <DetailedEvaluation interviewData={pastInterviews[pastInterviews.length - 1]} clickHandler={performanceClose} showExit={true}/>}
           </div>
         </CardContent>
