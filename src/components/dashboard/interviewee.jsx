@@ -16,7 +16,7 @@ import { ImSpinner } from "react-icons/im";
 import { FaSpinner } from "react-icons/fa6";
 import UserInfoForm from "./userInfoForm";
 import { useDispatch, useSelector } from "react-redux";
-import InterviewChat from "./InterviewChat";
+import InterviewChat from "./interviewChat";
 import DetailedEvaluation from "./detailedEvalaution";
 import { resetCurrentInterview } from "@/store/interviewSlice";
 
