@@ -185,4 +185,8 @@ background: linear-gradient(
   opacity: 0.85;
 }
 
+.candidateCard:hover{
+   background-color: color-mix(in oklab, var(--muted) 50%, transparent);
+}
+
   

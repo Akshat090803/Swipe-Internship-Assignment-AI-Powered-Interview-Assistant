@@ -72,7 +72,7 @@ export default function CandidateCard({ candidateData, onOpenDialog, total = 60 
 
   return (
     <div>
-      <Card>
+      <Card className=" ">
         <CardHeader className={"border-b flex flex-row justify-between items-center"}>
           <div>
             <CardTitle className={"text-xl font-bold mb-1 "}>{candidateData.contactDetails?.name}</CardTitle>

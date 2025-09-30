@@ -25,8 +25,8 @@ export default function ResumeInterview({resumeInterviewhandler}){
         </CardHeader>
         <CardContent className="flex gap-3 flex-col sm:flex-row"> 
        
-          <Button onClick={()=>{dispatch(resetCurrentInterview())}} variant="outline" className="flex-1 cursor-pointer">Start New Interview</Button>
-          <Button onClick={resumeInterviewhandler}  className="flex-1 gradient-primary text-white hover:opacity-85 cursor-pointer">Resume Interview</Button>
+          <Button onClick={()=>{dispatch(resetCurrentInterview())}} variant="outline" className="flex-1 cursor-pointer eye">Start New Interview</Button>
+          <Button onClick={resumeInterviewhandler}  className="flex-1 gradient-primary text-white hover:opacity-85 cursor-pointer eye">Resume Interview</Button>
           
         </CardContent>
       
