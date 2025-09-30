@@ -5,7 +5,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 
 const persistConfig = {
-  key:'root',
+  key:'crispAI',
   storage,
   version:1
 }
@@ -18,7 +18,7 @@ const store = configureStore({
     interview:persistedReducer
   },
   middleware:(getDefaultMiddleware)=>{
-    getDefaultMiddleware({
+   return getDefaultMiddleware({
       serializableCheck:{
         ignoreActions:[FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
       }

@@ -1,11 +1,8 @@
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Upload } from "lucide-react";
 import { useRef, useState } from "react";
@@ -15,22 +12,41 @@ import { Button } from "../ui/button";
 import { GrDocumentText } from "react-icons/gr";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { toast } from "sonner";
+import { ImSpinner } from "react-icons/im";
+import { FaSpinner } from "react-icons/fa6";
+import UserInfoForm from "./userInfoForm";
+import { useDispatch, useSelector } from "react-redux";
+import InterviewChat from "./InterviewChat";
+import DetailedEvaluation from "./detailedEvalaution";
+import { resetCurrentInterview } from "@/store/interviewSlice";
 
+
+export const STATUS = {
+  SHOWINFONEED:false,
+  SHOWUPLOADRESUME:true,
+  SHOWCHAT:false
+}
 
 export default function Interviewee() {
-  const [showChat, setShowChat] = useState(false);
-  const [showInfoNeed, setInfoNeed] = useState(false);
-  const [showUploadResume, setShowUploadResume] = useState(true);
+
+   const [status,setStatus]=useState(STATUS)
+
   const [loading,setLoading]=useState(false);
   const [error,setError]=useState(null);
   const [userInfo,setUserInfo]=useState(null);
+  const [fileName,setFileName]=useState(null)
+
+  const {currentStatus , pastInterviews}= useSelector((state)=>state.interview)
+  const dispatch = useDispatch()
  
   const fileChangeHandler = async (e)=>{
         const reader = new FileReader();
 
         setUserInfo(null);
         setError(null);
-
+        
+        setFileName(e.target.files[0].name);
+        
        reader.onload=(e)=>{
         
         const fileContent = e.target.result;
@@ -100,7 +116,8 @@ export default function Interviewee() {
 
         if(jsObject && Object.keys(jsObject).length>0){
           toast.success("Details fetched successfully.")
-          setShowUploadResume(false);
+          
+          setStatus({SHOWINFONEED:true , SHOWUPLOADRESUME:false,SHOWCHAT:false})
 
         }
 
@@ -108,14 +125,19 @@ export default function Interviewee() {
          } catch (err) {
            console.error("Error during extraction:", err);
             setError(err.message || "An unknown error occurred during extraction.");
+            toast.error(err.message || "An unknown error occurred during extraction.")
          }finally{
                    setLoading(false);
          }
+ } 
+
+ function performanceClose(){
+        dispatch(resetCurrentInterview());
  }
 
   return (
-    <div>
-      <Card className={"mt-0 pt-0"}>
+    <div className="mb-10">
+      <Card className={"mt-0 pt-0 "}>
         <CardHeader className={" border-b flex pb-0 py-4 "}>
           <div className="flex items-center gap-4">
             <div className="h-10 w-10 rounded-full gradient-primary flex items-center justify-center">
@@ -130,9 +152,9 @@ export default function Interviewee() {
           </div>
         </CardHeader>
         <CardContent className={"p-4"}>
-          <div className="bg-muted/40 rounded-lg h-60 min-h-60 p-4">
+          <div className="bg-muted/40 rounded-lg h-full  min-h-60 p-4 ">
             {/* resume Uplaod UI */}
-            {showUploadResume && (
+            {(status.SHOWUPLOADRESUME && currentStatus==='not-started') && (
               <div className="flex flex-col items-center justify-center h-full   space-y-2">
                 <Upload className="h-12 w-12 text-purple-500" />
                 <h3 className="text-xl font-bold">
@@ -149,8 +171,18 @@ export default function Interviewee() {
                     className="cursor-pointer gradient-primary text-white flex items-center gap-2 px-2 py-1 rounded-lg font-semibold justify-center"
                       aria-label="Upload your resume, only PDF or Word documents supported"
                   >
-                    <GrDocumentText />
-                    {loading ? "Loading..." : "Upload Resume"}
+                   
+                    {loading ? (
+                      <>
+                      <FaSpinner className="animate-spin h-4 w-4" />
+                      Parsing...
+                      </>
+                    ): (
+                      <>
+                       <GrDocumentText />
+                       Upload resume
+                      </>
+                    )}
                   </label>
 
                   <input
@@ -165,8 +197,10 @@ export default function Interviewee() {
                 </div>
               </div>
             )}
-            {showInfoNeed && <p>Uplaod info</p>}
-            {showChat && <p>Start interview</p>}
+            {status.SHOWINFONEED && <UserInfoForm userInfo={userInfo} setUserInfo={setUserInfo} fileName={fileName} setFileName={setFileName} setStatus={setStatus}/>}
+            {status.SHOWCHAT && <InterviewChat/>}
+            {currentStatus === "pending" && <p>Resume The Interview</p>}
+            {(currentStatus === "completed" && pastInterviews.length ) && <DetailedEvaluation interviewData={pastInterviews[pastInterviews.length - 1]} clickHandler={performanceClose}/>}
           </div>
         </CardContent>
       </Card>

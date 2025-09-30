@@ -1,7 +1,108 @@
-export default function Interviewer(){
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+} from "@/components/ui/card";
+
+import { MdOutlinePeopleAlt } from "react-icons/md";
+import { GoPeople, GoPerson } from "react-icons/go";
+import { Input } from "../ui/input";
+import { FaSortAlphaDown } from "react-icons/fa";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { Button } from "../ui/button";
+import { ChevronDown } from "lucide-react";
+import { useSelector } from "react-redux";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { useEffect, useState } from "react";
+import CandidateCard from "./candidateCard";
+
+export default function Interviewer() {
+  const { pastInterviews } = useSelector((state) => state.interview);
+   const [sort,setSort] = useState('date')
+  const [filteredInterviews,setFilteredInterviews]=useState(pastInterviews);
+  const [searchTerm , setSearchTerm] = useState("")
+
+  function searchHandler(e){
+    const value = e.target.value;
+    setSearchTerm(value)
+  }
+
+  
+
+  useEffect(()=>{
+         
+  },[sort])
+
   return (
-    <div>
-      <p>Interviewer.</p>
+    <div className="mb-10 ">
+      <Card className={"mt-0 pt-0 "}>
+        <CardHeader className={" flex pb-0  flex-col border-b"}>
+          <div className="flex items-center gap-4 py-4 border-b w-full">
+            <div className="h-10 w-10 rounded-full gradient-secondary flex items-center justify-center">
+              <GoPeople className="h-6 w-6 font-bold text-white " />
+            </div>
+            <div>
+              <h2 className="text-xl font-semibold text-gradient-tertiary">
+                Interviewer Dashboard
+              </h2>
+              <CardDescription >
+                Manage candidates and review interviews
+              </CardDescription>
+            </div>
+          </div>
+
+          <div className="pt-4 sm:gap-6 gap-3 flex-col w-full  sm:w-[60%] sm:flex-row flex">
+            <Input placeholder={"search candidates by name..."} value={searchTerm} onChange={searchHandler} />
+
+            <Select value={sort} onValueChange={setSort}>
+              <SelectTrigger  className="sm:w-48 w-full">
+                <FaSortAlphaDown className="text-white font-bold" />
+                <SelectValue  />
+              </SelectTrigger>
+             <SelectContent className="glass">
+              <SelectItem value="score">Sort by Score</SelectItem>
+              <SelectItem value="date">Sort by Date</SelectItem>
+              <SelectItem value="name">Sort by Name</SelectItem>
+            </SelectContent>
+            </Select>
+          </div>
+        </CardHeader>
+
+        <CardContent className={"p-4"}>
+          <div className="bg-muted/40 rounded-lg h-full  min-h-60 p-4 ">
+          {/* when no interview found */}
+            {(filteredInterviews.length===0) ? <div className="text-center py-6 ">
+              <GoPeople className="mx-auto w-16 h-16 mb-4 "/>
+               <h3 className="text-xl font-semibold mb-2">No completed interviews</h3>
+                <p className="text-subhead">
+              {pastInterviews.length === 0 
+                ? "Interviews will appear here once candidates complete them."
+                : "No candidates match your search criteria."
+              }
+            </p>
+
+            </div> : <div>
+                {
+                  filteredInterviews.map((item,ind)=>{
+                    return <CandidateCard candidateData={item} key={ind}/>
+                  })
+                }
+              </div>}
+          </div>
+        </CardContent>
+      </Card>
     </div>
-  )
+  );
 }

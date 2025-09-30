@@ -139,7 +139,16 @@
    background: linear-gradient(135deg, hsl(var(--primary-g)), hsl(var(--primary-glow-g)));
 }
 .gradient-secondary{
-  background: linear-gradient(135deg, hsl(var(--secondary-g)), hsl(var(--secondary-glow-g)));;
+  background: linear-gradient(135deg, hsl(var(--secondary-g)), hsl(var(--secondary-glow-g)));
+}
+
+.gradient-tertiary{
+background: linear-gradient(
+  to right,
+  oklch(0.6 0.25 260),
+  oklch(0.67 0.28 275),
+  oklch(0.62 0.25 290)
+);
 }
 
  .text-gradient {
@@ -159,6 +168,11 @@
     background-clip: text;
     color: transparent;
   }
+  .text-gradient-tertiary {
+    background: linear-gradient(135deg, hsl(var(--secondary-g)), hsl(var(--secondary-glow-g)));
+    background-clip: text;
+    color: transparent;
+  }
 
   .glass-strong {
     border: 1px solid hsl(var(--glass-border) / 0.4);
@@ -167,3 +181,6 @@
 
   
 
+
+
+  

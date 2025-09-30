@@ -6,7 +6,7 @@ import { WiSprinkle } from "react-icons/wi";
 export default function Header(){
 
   return (
-    <header className="flex justify-between fixed top-0 w-full py-2 px-4 sm:px-6 bg-background/60 backdrop-blur-sm border-b glass-strong">
+    <header className="flex justify-between fixed top-0 w-full py-2 px-4 sm:px-6 bg-background/60 backdrop-blur-sm border-b glass-strong z-50">
         <div className="flex items-center space-x-2">
           {/* brain icon */}
             <div className="w-10 h-10 rounded-xl flex items-center justify-center gradient-primary">

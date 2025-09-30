@@ -8,7 +8,7 @@ export default function MainContent() {
   const [activeTab, setActiveTab] = useState("Interviewee"); //state for active tab
 
   return (
-    <div className="mt-28 sm:px-6 px-4">
+    <div className="mt-28 sm:px-6 px-4 ">
       <Tabs
         value={activeTab}
         onValueChange={(value) => setActiveTab(value)}
@@ -47,6 +47,7 @@ export default function MainContent() {
           <Interviewer />
         </TabsContent>
       </Tabs>
+      
     </div>
   );
 }
