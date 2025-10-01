@@ -30,7 +30,7 @@ Crisp AI is a web application built with React that serves as an AI-powered assi
     -   Sonner for toast notifications
 -   **AI & Functionality:**
     -   Google Generative AI (Gemini) for resume parsing, question generation, and evaluation.
-    -   `pdfjs-dist` for handling PDF files.
+
 
 ## Setup and Installation
 
@@ -38,7 +38,7 @@ To run this project locally, follow these steps:
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/akshat090803/swipe-internship-assignment-ai-powered-interview-assistant.git](https://github.com/akshat090803/swipe-internship-assignment-ai-powered-interview-assistant.git)
+    git clone https://github.com/akshat090803/swipe-internship-assignment-ai-powered-interview-assistant.git
     cd swipe-internship-assignment-ai-powered-interview-assistant
     ```
 
@@ -60,6 +60,3 @@ To run this project locally, follow these steps:
 
 The application should now be running on `http://localhost:5173`.
 
-## Application Demo
-
-*A brief GIF or video showcasing the application's features will be added here.*
