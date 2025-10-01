@@ -38,8 +38,8 @@ To run this project locally, follow these steps:
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/akshat090803/swipe-internship-assignment-ai-powered-interview-assistant.git
-    cd swipe-internship-assignment-ai-powered-interview-assistant
+    git clone https://github.com/Akshat090803/Swipe-Internship-Assignment-AI-Powered-Interview-Assistant.git
+    cd Swipe-Internship-Assignment-AI-Powered-Interview-Assistant
     ```
 
 2.  **Install dependencies:**
