@@ -9,12 +9,15 @@ import {
 } from "@/components/ui/accordion";
 import { RxCross2 } from "react-icons/rx";
 import { BiLogOut } from "react-icons/bi";
+import { getScoreColor } from "./candidateCard";
+
 const getColorAccToScore = (score) => {
   if (score <= 30) return "[&>div]:bg-red-500";
   if (score <= 50) return "[&>div]:bg-orange-400";
   if (score <= 70) return "[&>div]:bg-yellow-400";
   return "[&>div]:bg-green-500";
 };
+
 
 export default function DetailedEvaluation({ interviewData, total = 60 , clickHandler , showExit =false ,extraCSS ="" }) {
   const { score, aiSummary, questionWiseScore, contactDetails, questions } =
@@ -25,11 +28,12 @@ export default function DetailedEvaluation({ interviewData, total = 60 , clickHa
   return (
     <div className="flex flex-col gap-6">
       <div className="relative border-b pb-4">
+         {showExit && <BiLogOut className="sm:absolute cursor-pointer h-7 w-7 sm:h-8 sm:w-8 top-0 text-purple-600" onClick={clickHandler}/>}
          <h2 className=" text-2xl font-bold text-center ">
         Performance Breakdown 🏆
        
       </h2>
-        {showExit && <BiLogOut className="absolute cursor-pointer h-8 w-8 top-0 text-purple-600" onClick={clickHandler}/>}
+       
       </div>
      
 
@@ -93,7 +97,7 @@ export default function DetailedEvaluation({ interviewData, total = 60 , clickHa
                       {questionWiseScore[ind].question}
                     </p>
                     
-                    <p className="text-gradient-secondary font-semibold " >{`(${item.difficulty})`}  <span className="ml-4">{`Score: ${item.score}/${item.outof}`}</span></p>
+                    <p className="text-gradient-secondary font-semibold " >{`(${item.difficulty})`}  <span className={` ml-4 rounded-lg px-1.5 border-2  w-fit text-xs font-bold ${getScoreColor(item.score,item.outof)}`}>{`Score: ${item.score}/${item.outof}`}</span></p>
                     </div>
 
                   </AccordionTrigger>

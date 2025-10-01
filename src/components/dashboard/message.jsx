@@ -1,8 +1,12 @@
+
+
 import { FaRobot } from "react-icons/fa6";
 import { IoPerson } from "react-icons/io5";
+import React from 'react'; 
 
-export default function Message({ message }) {
-  return <div className={`${message.sender==='bot'?'justify-start' : 'justify-end'} flex`}>
+
+const Message = React.forwardRef(function Message({ message }, ref) { 
+    return <div ref={ref}  className={`${message.sender==='bot'?'justify-start' : 'justify-end'} flex`}>
     {message.sender === "bot" ? <>
       
       <div className="flex gap-1 ">
@@ -25,18 +29,6 @@ export default function Message({ message }) {
       </div>
   
   </>}</div>;
-}
+}); 
 
-//    <div key={index} className={`chat   ${user?._id===mess?.senderId ?'chat-end':'chat-start'} `}>
-//   <div className={`chat-image avatar ${user?._id===mess?.senderId && 'hidden'}`}>
-//     <div className="w-7 rounded-full ">
-//       <img
-//         alt="profilePicture"
-//         src={selectedUser?.profilePicture || "https://www.sunsetlearning.com/wp-content/uploads/2019/09/User-Icon-Grey-300x300.png"}
-//         loading="lazy"/>
-//     </div>
-//   </div>
-
-//  <pre ref={index === messages.length - 1 ? endMessageRef : null} className={`chat-bubble font-sans sm:max-w-md overflow-hidden break-words text-ellipsis whitespace-pre-wrap  ${user?._id===mess?.receiverId ?'dark:bg-darkTheme-dialog bg-[#efefef] text-black dark:text-darkTheme-mainText':'dark:bg-darkTheme-btnBlue bg-darkTheme-btnBlue'}`}>{mess.message}</pre>
-
-// </div>
+export default Message;

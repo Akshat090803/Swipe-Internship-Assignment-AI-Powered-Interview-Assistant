@@ -23,7 +23,7 @@ const STATUS = {
   FINISHED: "finished",
 };
 export default function InterviewChat() {
-  const inputRef = useRef(null);
+  const lastMessageRef = useRef(null);
 
   const [disable, setDisable] = useState(false);
   const [answer, setAnswer] = useState("");
@@ -44,6 +44,14 @@ export default function InterviewChat() {
   const dispatch = useDispatch();
 
   const hasInterviewStarted = interviewChat && interviewChat.length > 3;
+
+
+  //! for auto scroll to last message
+    useEffect(() => {
+    if (lastMessageRef.current) {
+      lastMessageRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [interviewChat.length]);
 
   // Actual interview start handler
   function handleStartInterview() {
@@ -102,9 +110,9 @@ export default function InterviewChat() {
 
     setAnswer("");
 
-    if (currentQuestionIndex >= questions.length - 1 ) {
-      handleFinalEvaluation();
-    }
+    // if (currentQuestionIndex >= questions.length - 1 ) {
+    //   handleFinalEvaluation();
+    // }
   }
 
   //!Function to evaluate score
@@ -176,6 +184,18 @@ ${JSON.stringify(answers)}
   }
 
   useEffect(() => {
+
+    if (
+      questions.length > 0 &&
+      answers.length === questions.length &&
+      currentStatus === "pending" &&
+      evaluatingStatus === STATUS.LOADING
+    ) {
+      handleFinalEvaluation();
+    }
+  }, [answers.length, questions.length, currentStatus, evaluatingStatus]);
+
+  useEffect(() => {
     // Don't start a timer if time is already up
     if (remainingTime <= 0) {
       return;
@@ -190,11 +210,11 @@ ${JSON.stringify(answers)}
   }, [remainingTime, dispatch]);
 
   useEffect(() => {
-    if (remainingTime === 0 && answers.length < 5) {
+    if (remainingTime === 0 && answers.length < questions.length && hasInterviewStarted) {
       console.log("Auto-submitting answer...");
       handleAnswerSubmition();
     }
-  }, [remainingTime]);
+  }, [remainingTime, answers.length, questions.length]);
 
   return (
     <div className="-z-10">
@@ -202,7 +222,8 @@ ${JSON.stringify(answers)}
         {interviewChat && interviewChat.length > 0 ? (
           <div className="space-y-4">
             {interviewChat.map((item, index) => {
-              return <Message key={index} message={item} />;
+              const isLastMessage = index === interviewChat.length - 1;
+              return <Message key={index} message={item} ref={isLastMessage ? lastMessageRef : null} />;
             })}
           </div>
         ) : (
@@ -214,9 +235,9 @@ ${JSON.stringify(answers)}
           <div className="w-full flex justify-center">
             <Button
               onClick={handleStartInterview}
-              className={"cursor-pointer "}
+              className={"cursor-pointer bg-background text-white hover:bg-background eye"}
             >
-              Click here when you're ready
+              Click here when you're ready 🚀
             </Button>
           </div>
         </>
@@ -224,9 +245,9 @@ ${JSON.stringify(answers)}
         <>
           {
             // if all questions and answer completed
-            answers && answers.length>=6 ? (
+            answers && answers.length>=questions.length ? (
               <div className="w-full flex justify-center">
-                <Button disabled = {evaluatingStatus===STATUS.LOADING } onClick={viewEvaluationOnCLick}  className={"cursor-pointer "}>
+                <Button disabled = {evaluatingStatus===STATUS.LOADING } onClick={viewEvaluationOnCLick}  className={"cursor-pointer eye"}>
                   {evaluatingStatus===STATUS.LOADING  && (
                     <>
                       <FaSpinner className="animate-spin h-4 w-4" />
@@ -254,7 +275,7 @@ ${JSON.stringify(answers)}
                   disabled={disable}
                   onChange={onChangeHandler}
                   value={answer}
-                  ref={inputRef}
+                
                   className={" max-h-20"}
                   placeholder="Type your answer here."
                 />
@@ -269,7 +290,7 @@ ${JSON.stringify(answers)}
                   <Button
                     onClick={handleAnswerSubmition}
                     disabled={disable}
-                    className=" sm:h-[47%] flex-1 text-white gradient-primary cursor-pointer"
+                    className=" sm:h-[47%] flex-1 text-white gradient-primary cursor-pointer eye"
                   >
                     <IoIosSend />
                     {/* <GrSend /> */}

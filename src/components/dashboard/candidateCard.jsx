@@ -1,83 +1,34 @@
-
-// import { FaRegEye } from "react-icons/fa6";
-// import { Badge } from "../ui/badge";
-// import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-
-
- 
-// export default function CandidateCard({ candidateData ,total=60}) {
-
- 
-
-//   const getScoreColor = (score) => {
-//       score = (score / total)*100;
-//    if (score >= 80) {
-//       return 'bg-green-100 border-green-500 text-green-700';
-//     }
-//     if (score >= 50) {
-//       return 'bg-yellow-100 border-yellow-500 text-yellow-700';
-//     }
-//     return 'bg-red-100 border-red-500 text-red-700';
-//   };
-
-//   return (
-//     <div>
-//       <Card className={" cursor-pointer"}>
-//         <CardHeader className={"border-b flex flex-row justify-between items-center"}>
-        
-//           <div>
-//              <CardTitle className={"text-xl font-bold "}>{candidateData.contactDetails?.name}</CardTitle>
-//           <CardDescription> 
-//           <p className={`rounded-lg py-1 px-3 border-2  w-fit text-xs font-bold ${getScoreColor(candidateData.score)}`}>{`Score: ${candidateData.score}/60`}</p>
-          
-//           </CardDescription>
-//           </div>
-        
-        
-//          <div className="h-8 w-8 bg-white hover:opacity-85 rounded-lg p-1 flex items-center justify-center">
-//           <FaRegEye className="h-4 w-4 text-black" />
-//          </div>
-           
-//         </CardHeader>
-//         <CardContent>
-//           <h3 className="text-xl font-semibold">Interview Summary</h3>
-//           <p className=" overflow-hidden line-clamp-3 text-subhead ">{candidateData.aiSummary}</p>
-//         </CardContent>
-        
-//       </Card>
-//     </div>
-//   );
-// }
-
 import { FaRegEye } from "react-icons/fa6";
 import { Badge } from "../ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { DialogTrigger } from "../ui/dialog";
 
-export default function CandidateCard({ candidateData, onOpenDialog, total = 60 }) {
-
-  const getScoreColor = (score) => {
+export const getScoreColor = (score , total) => {
     score = (score / total) * 100;
-    if (score >= 80) {
-      return 'bg-green-100 border-green-500 text-green-700';
-    }
-     if (score >= 60) {
-      return 'bg-purple-100 border-purple-500 text-purple-700';
-    }
-    if (score >= 45) {
-      return 'bg-yellow-100 border-yellow-500 text-yellow-700';
-    }
-    return 'bg-red-100 border-red-500 text-red-700';
+      if (score >= 70) {
+    return 'bg-green-100 border-green-500 text-green-700'; // Excellent
+  } 
+  if (score >= 51) {
+    return 'bg-purple-200 border-purple-500 text-purple-700'; // Average
+  }
+  if (score >= 31) {
+    return 'bg-orange-100 border-orange-500 text-orange-700'; // Below average
+  }
+  return 'bg-red-100 border-red-500 text-red-700'; // Poor
   };
 
+export default function CandidateCard({ candidateData, onOpenDialog, total = 60 }) {
+
+  
+
   return (
-    <div>
-      <Card className=" ">
+    <div >
+      <Card className=" bg-background/60 candidateCard">
         <CardHeader className={"border-b flex flex-row justify-between items-center"}>
           <div>
             <CardTitle className={"text-xl font-bold mb-1 "}>{candidateData.contactDetails?.name}</CardTitle>
             <CardDescription>
-              <p className={`rounded-lg py-1 px-3 border-2  w-fit text-xs font-bold ${getScoreColor(candidateData.score)}`}>{`Score: ${candidateData.score}/60`}</p>
+              <p className={`rounded-lg py-1 px-3 border-2  w-fit text-xs font-bold ${getScoreColor(candidateData.score,total)}`}>{`Score: ${candidateData.score}/60`}</p>
             </CardDescription>
           </div>
           <DialogTrigger asChild>

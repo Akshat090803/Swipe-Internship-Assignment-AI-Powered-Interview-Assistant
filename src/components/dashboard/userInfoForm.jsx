@@ -262,7 +262,7 @@ Here is an example of the required output structure:
           <Button
           disabled={loading}
             className={
-              "gradient-primary text-white mt-4 cursor-pointer font-bold"
+              "gradient-primary eye text-white mt-4 cursor-pointer font-bold"
               
             }
             type="submit"

@@ -66,7 +66,7 @@ export default function Interviewer() {
 
   return (
     <div className="mb-10 ">
-      <Card className={"mt-0 pt-0 "}>
+      <Card className={"mt-0 pt-0  "}>
         <CardHeader className={" flex pb-0  flex-col border-b"}>
           <div className="flex items-center gap-4 py-4 border-b w-full">
             <div className="h-10 w-10 rounded-full gradient-secondary flex items-center justify-center">

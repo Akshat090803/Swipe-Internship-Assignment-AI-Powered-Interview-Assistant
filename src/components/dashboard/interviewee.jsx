@@ -171,7 +171,7 @@ export default function Interviewee() {
                   <label
                   
                     htmlFor="resume"
-                    className={` gradient-primary text-white flex items-center gap-2 px-2 py-1 rounded-lg font-semibold justify-center ${loading ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+                    className={`eye  gradient-primary text-white flex items-center gap-2 px-2 py-1 rounded-lg font-semibold justify-center ${loading ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
                       aria-label="Upload your resume, only PDF or Word documents supported"
                   >
                    
