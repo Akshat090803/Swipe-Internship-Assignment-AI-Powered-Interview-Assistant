@@ -24,6 +24,7 @@ const interviewSlice = createSlice({
         score: null,
         questionWiseScore:[],
         aiSummary: null,
+        pauseResume:false
       };
     },
 
@@ -117,6 +118,10 @@ const interviewSlice = createSlice({
       state.currentInterview = null;
       state.currentStatus = "not-started";
     },
+
+    togglePauseResume : (state)=>{
+      state.currentInterview.pauseResume = !state.currentInterview.pauseResume
+    }
   },
 });
 
@@ -130,4 +135,5 @@ export const {
   addMessage,
   setQuestionIndex,
   setRemainingTime,
+  togglePauseResume
 } = interviewSlice.actions;

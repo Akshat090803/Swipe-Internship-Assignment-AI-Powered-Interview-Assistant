@@ -12,6 +12,7 @@ import {
   completeInterview,
   setQuestionIndex,
   setRemainingTime,
+  togglePauseResume,
 } from "@/store/interviewSlice";
 import { FaSpinner } from "react-icons/fa6";
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -32,6 +33,8 @@ export default function InterviewChat() {
 
   const { currentInterview, currentStatus } = useSelector((state) => state.interview);
 
+  // const [pauseresume , setPauseresume] = useState(false);
+
   
   const {
     interviewChat = [],
@@ -39,6 +42,7 @@ export default function InterviewChat() {
     currentQuestionIndex = 0,
     remainingTime = 0,
     answers = [],
+    pauseResume
   } = currentInterview || {};
 
   const dispatch = useDispatch();
@@ -114,6 +118,13 @@ export default function InterviewChat() {
     //   handleFinalEvaluation();
     // }
   }
+
+
+  //!commenting this out as this was the function for the functionality asked to implement by the Interviewr (Swipe)
+   function interviewPauseHandler(){
+    dispatch(togglePauseResume());
+    console.log("resume  interview state toggle",pauseResume)
+   }
 
   //!Function to evaluate score
   async function handleFinalEvaluation() {
@@ -201,13 +212,15 @@ ${JSON.stringify(answers)}
       return;
     }
 
+    if(pauseResume) return ;
+
     //update remaining time each second
     const intervalId = setInterval(() => {
       dispatch(setRemainingTime());
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [remainingTime, dispatch]);
+  }, [remainingTime, dispatch, pauseResume]);
 
   useEffect(() => {
     if (remainingTime === 0 && answers.length < questions.length && hasInterviewStarted) {
@@ -296,6 +309,18 @@ ${JSON.stringify(answers)}
                     {/* <GrSend /> */}
                   </Button>
                 </div>
+
+{/* This functionality was asked to add by the interviewer in interview , so commenting out the ui part */}
+                {/* <div>
+                  {
+                    !pauseResume ? (
+                      <Button onClick={interviewPauseHandler}>Pause</Button>
+                    ):(
+                      <Button onClick={interviewPauseHandler}>Resume</Button>
+                    )
+
+                  }
+                </div> */}
               </div>
             )
           }
