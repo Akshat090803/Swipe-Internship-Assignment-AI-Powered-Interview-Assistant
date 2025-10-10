@@ -42,7 +42,7 @@ export default function DetailedEvaluation({
       model: "gemini-2.5-flash-lite-preview-06-17",
     });
 
-    const prompt = `
+const prompt = `
 You are an expert Full Stack Developer (React/Node.js) and seasoned technical educator. Your goal is to create a highly accurate and educational answer key for interview preparation.
 
 I will provide a JSON array of technical interview questions. Each question object will include "question" and "difficulty" fields.
@@ -51,7 +51,8 @@ Your task:
 For each question, provide the **ideal, technically comprehensive, and pedagogically clear answer**, as a JSON array named "answerKey".
 
 Guidelines:
-- Write clear, detailed explanations that show mastery of React, Node.js, and full-stack concepts.
+- Write clear, logically structured explanations in full sentences and paragraphs.
+- Do NOT use section headers like "Definition", "How to use", "Example", etc.
 - Include concise, relevant **code snippets** when they clarify the concept (avoid unnecessary code).
 - Focus on **accuracy**, **depth**, and **clarity**.
 - Cover **core principles**, **trade-offs**, and **best practices** where applicable.
